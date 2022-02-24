@@ -42,11 +42,11 @@ public class CameraFollow : MonoBehaviour
             Mathf.Clamp(player.position.y + offset.y, yMin, yMax), transform.position.z);
 
         
-            if (player.transform.position.x < transform.position.x - 1.5f)
+            if (player.transform.position.x < transform.position.x - 2f)
             {
                 direction = walkdirection.left;
             }
-            else if (player.position.x > transform.position.x + 1.5f)
+            else if (player.position.x > transform.position.x + 2f)
             {
                 direction = walkdirection.right;
             }
