@@ -21,6 +21,7 @@ public class AudioManager : MonoBehaviour //Daan
 
     [Header("Settings")]
     public bool loopMusic = false;
+    public bool playOnStart = true;
 
     private void Awake()
     {
@@ -39,6 +40,9 @@ public class AudioManager : MonoBehaviour //Daan
             SetMusicVolume(PlayerPrefs.GetFloat("musicVolume"));
             SetSoundEffectVolume(PlayerPrefs.GetFloat("soundEffectVolume"));
         }
+
+        if (playOnStart == true)
+            PlayBackgroundMusic(Random.Range(0, backgroundMusic.Length - 1));
     }
 
     /// <summary>
