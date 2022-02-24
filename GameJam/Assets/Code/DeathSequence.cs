@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public class DeathSequence : MonoBehaviour
 {
     private GameObject                      _player;                            // Player GameObject.
+    [SerializeField] private int            _particleAmount;                    // Amount of particles spawned upon death.
     [SerializeField] private GameObject     _particles;                         // Dying particles GameObject.
     [SerializeField] private float          _intervalDeathFreeze;               // Time between starting the death particles and opening the menu.
     [SerializeField] private UnityEvent     _enableDeathScreen;                 // Event invoked when it is time to show the DeathScreen.
@@ -29,7 +30,10 @@ public class DeathSequence : MonoBehaviour
 
     private IEnumerator DeathAnimation()
     {
-        Instantiate(_particles, _player.transform.position, Quaternion.identity);
+        for (int i = 0; i < _particleAmount; i++)
+        {
+            Instantiate(_particles, _player.transform.position, Quaternion.identity);
+        }
 
         yield return new WaitForSeconds(_intervalDeathFreeze / 2);
 
