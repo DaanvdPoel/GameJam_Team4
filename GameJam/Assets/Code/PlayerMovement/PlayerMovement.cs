@@ -140,7 +140,9 @@ public class PlayerMovement : MonoBehaviour
             jumping = false;
         }
         else if(point.point.x <= transform.position.x || point.point.x >= transform.position.x)
-            jumping = true;
+        {
+            isGrounded=false;
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
