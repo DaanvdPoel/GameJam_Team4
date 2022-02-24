@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     float speed;
     float xJump;
+    RaycastHit2D hit;
     Rigidbody2D rb;
     float xMove = 0;
     float jumpHeight;
@@ -27,9 +28,11 @@ public class PlayerMovement : MonoBehaviour
     Vector2 counterJumpForce;
     Vector2 newPos;
     Vector2 previousPos;
+    BoxCollider2D boxCollider;
 
     private void Start()
     {
+        boxCollider = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         state = fallingState.standing;
         jumpHeight = CalculateJumpForce(Physics2D.gravity.magnitude, jump);
@@ -38,12 +41,17 @@ public class PlayerMovement : MonoBehaviour
         counterJumpForce = new Vector2(0, fallSpeed);
     }
 
+    private void Update()
+    {
+        GroundCheck();
+
+    }
+
     private void FixedUpdate()
     {
         movementVector = InputManager.Instance.inputActions.Player.Move.ReadValue<Vector2>();
 
         Move();
-
         if (jumping)
         {
             StopJump();
@@ -121,34 +129,20 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void GroundCheck()
     {
-        point = collision.GetContact(0);
-        if(point.point.y < transform.position.y)
-        {
-            isGrounded = true;
-            jumping = false;
-        }
-    }
+        hit = Physics2D.Raycast(boxCollider.bounds.center, Vector2.down, boxCollider.bounds.extents.y + 0.1f);
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        point = collision.GetContact(0);
-        if (point.point.y < transform.position.y)
+        if (hit.point != Vector2.zero)
         {
-            isGrounded = true;
             jumping = false;
+            isGrounded = true;
         }
-        else if(point.point.x <= transform.position.x || point.point.x >= transform.position.x)
+        else
         {
-            isGrounded=false;
+            jumping = true;
+            isGrounded = false;
         }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        isGrounded = false;
-        jumping = true;
     }
 
     public float CalculateJumpForce(float gravityStrength, float jumpHeight)
