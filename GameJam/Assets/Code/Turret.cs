@@ -5,8 +5,6 @@ using UnityEngine;
 public class Turret : MonoBehaviour
 {
     public GameObject turret;
-    public Sprite turret1;
-    public Sprite turret2;
     public GameObject bullet;
     public Transform spawnpoint;
     public Transform endpoint;
@@ -26,7 +24,6 @@ public class Turret : MonoBehaviour
     {
         if (shot)
         {
-            turret.GetComponent<SpriteRenderer>().sprite = turret1;
             bullet.SetActive(true);
             bullet.transform.SetParent(this.transform);
             bullet.transform.Translate(Vector2.right * Time.deltaTime * 20f);
@@ -54,7 +51,6 @@ public class Turret : MonoBehaviour
 
         if (!shot)
         {
-            turret.GetComponent<SpriteRenderer>().sprite = turret2;
             bullet.SetActive(false);
             bullet.transform.SetParent(this.transform);
             bullet.GetComponent<Transform>().position = /*new Vector2(xposition, yposition);*/ spawnpoint.position;

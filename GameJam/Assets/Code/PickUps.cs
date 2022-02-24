@@ -49,16 +49,6 @@ public class PickUps : MonoBehaviour
             key2.transform.SetParent(this.transform);
             key2.GetComponent<BoxCollider2D>().enabled = false;
         }
-
-        if (collision.gameObject.CompareTag("door"))
-        {
-            key.transform.SetParent(null);
-            key.GetComponent<Transform>().position = new Vector2(-2f, 4f);
-            havekey = false;
-            key.GetComponent<BoxCollider2D>().enabled = true;
-            door.GetComponent<BoxCollider2D>().enabled = false;
-
-        }
     }
 
 
@@ -97,11 +87,13 @@ public class PickUps : MonoBehaviour
         if (!door.GetComponent<BoxCollider2D>().enabled)
         {
             key.SetActive(false);
+            door.GetComponent<CapsuleCollider2D>().enabled = false;
         }
 
         if (!door15.GetComponent<BoxCollider2D>().enabled)
         {
             key2.SetActive(false);
+            door15.GetComponent<CapsuleCollider2D>().enabled = false;
         }
     }  
 }

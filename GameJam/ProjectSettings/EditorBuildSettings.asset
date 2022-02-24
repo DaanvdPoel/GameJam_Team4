@@ -5,13 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Content/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Content/Scenes/Tycho/TychoMenu.unity
-    guid: cb527ee9af504264f90ad9aa0357ce13
+    path: Assets/Content/Scenes/MainGame/MainMenu.unity
+    guid: 5881406db412be74b825c86de4acfef9
   - enabled: 1
-    path: Assets/Content/Scenes/Tycho/TychoGame.unity
-    guid: a842680a34f8d8b41b93c0d5b2c833e4
+    path: Assets/Content/Scenes/MainGame/LevelSelect.unity
+    guid: 68c9f096daa34704fb255c85c278d0f4
+  - enabled: 1
+    path: Assets/Content/Scenes/MainGame/Level1.unity
+    guid: 1328ff0e0802bcf498f01c1ef84b6629
+  - enabled: 1
+    path: Assets/Content/Scenes/MainGame/Level2.unity
+    guid: 16efb9b620cc42c408547dacf7f025a2
+  - enabled: 1
+    path: Assets/Content/Scenes/MainGame/Third Level.unity
+    guid: 1f503bee892aa6b4b86b062ed69c4c51
   m_configObjects: {}
