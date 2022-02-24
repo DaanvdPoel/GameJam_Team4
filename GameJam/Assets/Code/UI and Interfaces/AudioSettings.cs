@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class AudioSettings : MonoBehaviour
+public class AudioSettings : SettingsMenu
 {
     // Code based on https://www.youtube.com/watch?v=yWCHaTwVblk&ab_channel=Hooson
 

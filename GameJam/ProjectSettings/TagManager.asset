@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - lever
+  - lever2
+  - key
+  - key2
+  - door
+  - enterance
   layers:
   - Default
   - TransparentFX

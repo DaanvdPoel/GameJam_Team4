@@ -6,6 +6,9 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject     _pauseMenu;                 // Pause screen.         
     [SerializeField] private GameObject     _settingsMenu;              // Settings interface.
+    [SerializeField] private GameObject     _quitScreen;                // Settings interface.
+    [SerializeField] private GameObject     _restartScreen;             // Settings interface.
+
     [SerializeField] private UnityEvent     _pauseButtonPress;
 
     private bool    _paused             = false;                        // Is the game currently paused.
@@ -19,7 +22,7 @@ public class PauseMenu : MonoBehaviour
         if (InputManager.Instance.inputActions.Player.Pause.triggered)
         {
 
-            if (!_settingsMenu.activeInHierarchy)
+            if (!_settingsMenu.activeInHierarchy && !_quitScreen.activeInHierarchy && !_restartScreen.activeInHierarchy)
             {
                 _pauseButtonPress.Invoke();
             }

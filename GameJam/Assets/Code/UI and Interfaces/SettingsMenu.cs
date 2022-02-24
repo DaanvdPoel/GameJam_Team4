@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SettingsMenu : MonoBehaviour
@@ -13,8 +11,9 @@ public class SettingsMenu : MonoBehaviour
         }    
     }
 
+
     // Unload the settings interface.
-    public void CloseSettingsMenu()
+    private void CloseSettingsMenu()
     {
         this.gameObject.SetActive(false);
     }
