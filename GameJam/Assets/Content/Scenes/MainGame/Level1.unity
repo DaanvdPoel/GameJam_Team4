@@ -12318,15 +12318,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc01c2eb0631cce4bbbaabc198642837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  switchforglitches: {fileID: 1398071814}
-  enemy: {fileID: 1398071814}
-  enterance: {fileID: 1398071814}
   door: {fileID: 1897614393}
   door15: {fileID: 1398071814}
   key: {fileID: 353018542}
-  thelever: {fileID: 1398071814}
-  Lever1: {fileID: 0}
-  Lever2: {fileID: 0}
+  key2: {fileID: 1398071814}
 --- !u!1 &1897614393 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 990228209958066008, guid: ae0678ceb5d4fd34fbb61be46b47e3de, type: 3}
