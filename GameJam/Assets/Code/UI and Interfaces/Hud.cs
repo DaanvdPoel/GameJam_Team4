@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class Hud : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _healthElement;
+    [SerializeField] private TextMeshProUGUI    _healthElement;             // UI element displaying the player's current health.
+    
+    
+    
+    
     public void UpdateHealth()
     {
         int shownHealth;
