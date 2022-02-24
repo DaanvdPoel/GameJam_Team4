@@ -8,15 +8,15 @@ public class SceneSwitch : MonoBehaviour
     // Switch the scene to the Starting screen of the game.
     public void ToMainMenu()
     {
-        SceneManager.LoadScene("TychoMenu");
+        SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1;
     }
 
 
     // Switch the first playable world of the game.
-    public void ToLevel1()
+    public void ToLevelSelect()
     {
-        SceneManager.LoadScene("TychoGame");
+        SceneManager.LoadScene("LevelSelect");
         Time.timeScale = 1;
     }
 
