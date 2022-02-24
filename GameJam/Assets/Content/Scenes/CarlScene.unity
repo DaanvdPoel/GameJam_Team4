@@ -468,7 +468,8 @@ MonoBehaviour:
   yMax: 463.53
   xMin: -435.26
   yMin: -476.3
-  offset: {x: 5, y: 3}
+  direction: 0
+  offset: {x: 4, y: 2}
   player: {fileID: 1748594118}
   walkingLerpSpeed: 2
 --- !u!1 &436339660
@@ -839,7 +840,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.01
-  m_GravityScale: 5
+  m_GravityScale: 4
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -953,7 +954,7 @@ MonoBehaviour:
   movingLeft: 0
   moving: 0
   fallSpeed: -50
-  jump: 30
+  jump: 25
   maxSpeed: 7
   jumping: 0
   state: 0
