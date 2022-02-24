@@ -9,7 +9,7 @@ public class Turret : MonoBehaviour
     public Transform spawnpoint;
     public Transform endpoint;
     public bool shot;
-    float timer = 120f;
+    float timer = 220f;
     public enum direction {up,down,left,right};
     public direction d;
     
@@ -26,27 +26,26 @@ public class Turret : MonoBehaviour
         {
             bullet.SetActive(true);
             bullet.transform.SetParent(this.transform);
-            bullet.transform.Translate(Vector2.right * Time.deltaTime * 20f);
-            /*
-            if (d = direction.up)
+
+            if (d == direction.up)
             {
-                bullet.transform.Translate(Vector2.up * Time.deltaTime * 20f);
+                bullet.transform.Translate(Vector2.up * Time.deltaTime * 15f);
             }
 
-            if (d = direction.down)
+            if (d == direction.down)
             {
-                bullet.transform.Translate(Vector2.down * Time.deltaTime * 20f);
+                bullet.transform.Translate(Vector2.down * Time.deltaTime * 15f);
             }
 
-            if (d = direction.left)
+            if (d == direction.left)
             {
-                bullet.transform.Translate(Vector2.left * Time.deltaTime * 20f);
+                bullet.transform.Translate(Vector2.left * Time.deltaTime * 15f);
             }
 
-            if (d = direction.right)
+            if (d == direction.right)
             {
-                bullet.transform.Translate(Vector2.right * Time.deltaTime * 20f);
-            }*/
+                bullet.transform.Translate(Vector2.right * Time.deltaTime * 15f);
+            }
         }
 
         if (!shot)
@@ -71,7 +70,7 @@ public class Turret : MonoBehaviour
         timer--;
         if (timer < 0)
         {
-            timer = 120f;
+            timer = 700f;
         }
     }
 }
