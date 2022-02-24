@@ -35,13 +35,10 @@ public class DeathSequence : MonoBehaviour
             Instantiate(_particles, _player.transform.position, Quaternion.identity);
         }
 
-        yield return new WaitForSeconds(_intervalDeathFreeze / 2);
-
-
         // Disable the player and place particles instead.
         _player.SetActive(false);
 
-        yield return new WaitForSeconds(_intervalDeathFreeze / 2);
+        yield return new WaitForSeconds(_intervalDeathFreeze);
         
         // Freeze the game and show the DeathScreen.
         Time.timeScale = 0;

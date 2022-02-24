@@ -12,6 +12,9 @@ public class SwitchOrder : MonoBehaviour
 
     public GameObject door2;
     public GameObject key2;
+
+    private bool keyActive;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -136,9 +139,13 @@ public class SwitchOrder : MonoBehaviour
             !flickswitch4.activeSelf &&
             !flickswitch5.activeSelf)
         {
-            key2.SetActive(true);
-            //door2.GetComponent<BoxCollider2D>().enabled = false;
-            Invoke("DoorTimer", 8f);
+            if (!keyActive)
+            {
+                key2.SetActive(true);
+                keyActive = true;
+            }
+                //door2.GetComponent<BoxCollider2D>().enabled = false;
+                Invoke("DoorTimer", 5f);
         }
     }
 
@@ -151,6 +158,7 @@ public class SwitchOrder : MonoBehaviour
         flickswitch4.SetActive(true);
         flickswitch5.SetActive(true);
 
+        keyActive = false;
         door2.GetComponent<BoxCollider2D>().enabled = true;
         key2.SetActive(false);
     }
