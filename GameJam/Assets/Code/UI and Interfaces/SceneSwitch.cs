@@ -21,6 +21,14 @@ public class SceneSwitch : MonoBehaviour
     }
 
 
+    // Reload the current scene.
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
+    }
+
+
     // Shut down this instance of the game.
     public void QuitGame()
     {

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using System;
@@ -5,49 +6,68 @@ using System;
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D rb;
-    float jump = 13;
+    ContactPoint2D point;
+    float jump = 60;
+    float fallSpeed = -90;
     float xMove = 0;
+    private float xJump;
     float speed = 13f;
-    Movement movement;
     Vector2 movementVector;
     bool isGrounded = false;
     private bool jumping;
+    float jumpHeight;
+    private bool holdingJump;
+    Vector2 counterJumpForce;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        movement = new Movement();
-        movement.Enable();
+        jumpHeight = CalculateJumpForce(Physics2D.gravity.magnitude, jump);
+        InputManager.Instance.inputActions.Player.Jump.performed += Jump;
+        InputManager.Instance.inputActions.Player.Jump.canceled += JumpCancel;
+        counterJumpForce = new Vector2(0, fallSpeed);
     }
 
     private void FixedUpdate()
     {
-        movementVector = movement.Player.Move.ReadValue<Vector2>();
-        float jumpValue = movement.Player.Jump.ReadValue<float>();
+        movementVector = InputManager.Instance.inputActions.Player.Move.ReadValue<Vector2>();
 
         Move();
 
-        if(isGrounded)
-            Jump(jumpValue);
-
+        if (jumping)
+        {
+            StopJump();
+        }
     }
 
-    private void JumpRelease()
+    private void StopJump()
     {
-
+        if(!holdingJump && Vector2.Dot(rb.velocity, Vector2.up) > 0)
+        {
+            rb.AddForce(counterJumpForce);
+        }
     }
 
-    private void Jump(float jumpValue)
+    private void Jump(InputAction.CallbackContext context)
     {
-        rb.AddForce(new Vector2(0, jump) * jumpValue, ForceMode2D.Impulse);
+        holdingJump = true;
+        if (isGrounded)
+        {
+            rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+        }
+    }
+
+    private void JumpCancel(InputAction.CallbackContext context)
+    {
+        holdingJump = false;
     }
 
     private void Move()
     {
-        if (movement.Player.Move.inProgress)
+        if (InputManager.Instance.inputActions.Player.Move.inProgress)
         {
             xMove = movementVector.x;
+            xJump = xMove;
             speed = 10f;
             var mover = new Vector2(xMove, 0) * Time.fixedDeltaTime * speed;
             transform.position += (Vector3)mover;
@@ -55,17 +75,22 @@ public class PlayerMovement : MonoBehaviour
         else if (movementVector == Vector2.zero)
         {
             if (jumping)
-                speed = 8f;
+            {
+                var mover = new Vector2(xJump, 0) * Time.fixedDeltaTime * speed;
+                transform.position += (Vector3)mover;
+            }
             else
-                speed = Mathf.MoveTowards(speed, 0, 1.5f);
-            var mover = new Vector2(xMove, 0) * Time.fixedDeltaTime * speed;
-            transform.position += (Vector3)mover;
+            {
+                speed = Mathf.MoveTowards(speed, 0, 1f);
+                var mover = new Vector2(xMove, 0) * Time.fixedDeltaTime * speed;
+                transform.position += (Vector3)mover;
+            }
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        ContactPoint2D point = collision.GetContact(0);
+        point = collision.GetContact(0);
         if(point.point.y < transform.position.y)
         {
             isGrounded = true;
@@ -75,14 +100,24 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        ContactPoint2D point = collision.GetContact(0);
+        point = collision.GetContact(0);
         if (point.point.y < transform.position.y)
+        {
             isGrounded = true;
+            jumping = false;
+        }
+        else if(point.point.x <= transform.position.x || point.point.x >= transform.position.x)
+            jumping = true;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
         isGrounded = false;
         jumping = true;
+    }
+
+    public float CalculateJumpForce(float gravityStrength, float jumpHeight)
+    {
+        return Mathf.Sqrt(2 * gravityStrength * jumpHeight);
     }
 }

@@ -1,39 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
 
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject     _pauseMenu;                 // Pause screen.         
     [SerializeField] private GameObject     _settingsMenu;              // Settings interface.
+    [SerializeField] private UnityEvent     _pauseButtonPress;
 
     private bool    _paused             = false;                        // Is the game currently paused.
 
 
 
 
-    [System.Obsolete]
     private void Update()
     {
         // Switch on or off the pause menu when the settings aren't open.
         if (InputManager.Instance.inputActions.Player.Pause.triggered)
         {
 
-            if (!_settingsMenu.active)
+            if (!_settingsMenu.activeInHierarchy)
             {
-                if (!_paused)
-                {
-                    PauseGame();
-                }
-                else
-                {
-                    UnPauseGame();
-                }
+                _pauseButtonPress.Invoke();
             }
         }
     }
 
 
+    public void TogglePause()
+    {
+        if (!_paused)
+        {
+            PauseGame();
+        }
+        else
+        {
+            UnPauseGame();
+        }
+    }
 
 
     // Freeze the game and load the menu interface.

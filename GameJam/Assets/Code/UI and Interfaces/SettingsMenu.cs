@@ -4,18 +4,10 @@ using UnityEngine;
 
 public class SettingsMenu : MonoBehaviour
 {
-    Movement inputActions;
-
-    private void Start()
-    {
-        inputActions = new Movement();
-        inputActions.Enable();
-    }
-
     private void Update()
     {
         // If the corresponding key is pressed, close down the settings menu.
-        if (inputActions.Player.Pause.triggered)
+        if (InputManager.Instance.inputActions.Player.Pause.triggered || InputManager.Instance.inputActions.UI.Cancel.triggered)
         {
             CloseSettingsMenu();
         }    
