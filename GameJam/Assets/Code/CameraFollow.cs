@@ -25,14 +25,14 @@ public class CameraFollow : MonoBehaviour
     private Vector3 followPlayer;
     private CameraShake cameraShake;
 
-    public float walkingLerpSpeed = 2;
-    private float standingLerpSpeed = 1.5f;
+    public float walkingLerpSpeed = 1f;
+    private float standingLerpSpeed = 1f;
 
 
     private void Start()
     {
         cameraShake = GetComponent<CameraShake>();
-        offset.x = 4;
+        offset.x = 6;
         offset.y = 2;
     }
 
