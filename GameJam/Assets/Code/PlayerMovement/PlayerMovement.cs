@@ -156,11 +156,6 @@ public class PlayerMovement : MonoBehaviour
         return Mathf.Sqrt(2 * gravityStrength * jumpHeight);
     }
 
-    public void RestartScene(InputAction.CallbackContext context)
-    {
-        SceneManager.LoadScene("CarlScene");
-    }
-
     private void OnDestroy()
     {
         InputManager.Instance.inputActions.Player.Jump.performed -= Jump;
