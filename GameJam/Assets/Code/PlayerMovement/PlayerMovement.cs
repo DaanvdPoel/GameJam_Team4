@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine.InputSystem;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using System;
 
 public class PlayerMovement : MonoBehaviour
@@ -36,7 +35,6 @@ public class PlayerMovement : MonoBehaviour
         jumpHeight = CalculateJumpForce(Physics2D.gravity.magnitude, jump);
         InputManager.Instance.inputActions.Player.Jump.performed += Jump;
         InputManager.Instance.inputActions.Player.Jump.canceled += JumpCancel;
-        InputManager.Instance.inputActions.Player.Fire.performed += RestartScene;
         counterJumpForce = new Vector2(0, fallSpeed);
     }
 
@@ -156,15 +154,9 @@ public class PlayerMovement : MonoBehaviour
         return Mathf.Sqrt(2 * gravityStrength * jumpHeight);
     }
 
-    public void RestartScene(InputAction.CallbackContext context)
-    {
-        SceneManager.LoadScene("CarlScene");
-    }
-
     private void OnDestroy()
     {
         InputManager.Instance.inputActions.Player.Jump.performed -= Jump;
         InputManager.Instance.inputActions.Player.Jump.canceled -= JumpCancel;
-        InputManager.Instance.inputActions.Player.Fire.performed -= RestartScene;
     }
 }
