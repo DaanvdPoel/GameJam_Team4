@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4302989843931733381}
   - component: {fileID: 4302989843931733382}
   - component: {fileID: 3705270324586884208}
+  - component: {fileID: 6406347435347126940}
   m_Layer: 0
   m_Name: Pixel Glitch Thing
   m_TagString: Untagged
@@ -4826,6 +4827,21 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.293526, y: -0.23686343}
+  m_Offset: {x: 0.2190027, y: -0}
   serializedVersion: 2
-  m_Radius: 0.57
+  m_Radius: 1.0825286
+--- !u!114 &6406347435347126940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4302989843931733383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec1f7ea2dd0bae4469c269ca1db7f44c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageAmount: 0
+  DamageInterval: 0
+  Data: {fileID: 11400000, guid: 273024a75b42ec84c9ee1ae162b57c0d, type: 2}
