@@ -16,6 +16,7 @@ public class SwitchOrder : MonoBehaviour
     void Start()
     {
         door2.GetComponent<BoxCollider2D>().enabled = true;
+        key2.SetActive(false);
     }
 
     // Update is called once per frame
@@ -26,13 +27,13 @@ public class SwitchOrder : MonoBehaviour
         Opendoor2();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("key2"))
         {
             //door2
-            door2.GetComponent<BoxCollider2D>().enabled = false;
-            Invoke("DoorTimer", 8f);
+            
+            collision.gameObject.SetActive(false);
         }
     }
 
@@ -136,6 +137,8 @@ public class SwitchOrder : MonoBehaviour
             !flickswitch5.activeSelf)
         {
             key2.SetActive(true);
+            //door2.GetComponent<BoxCollider2D>().enabled = false;
+            Invoke("DoorTimer", 8f);
         }
     }
 
@@ -149,5 +152,6 @@ public class SwitchOrder : MonoBehaviour
         flickswitch5.SetActive(true);
 
         door2.GetComponent<BoxCollider2D>().enabled = true;
+        key2.SetActive(false);
     }
 }
