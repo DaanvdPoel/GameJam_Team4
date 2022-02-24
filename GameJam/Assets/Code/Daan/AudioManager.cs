@@ -35,10 +35,10 @@ public class AudioManager : MonoBehaviour //Daan
 
     private void Start()
     {
-        if (PlayerPrefs.HasKey("musicVolume"))
+        if (PlayerPrefs.HasKey("MusicVolume"))
         {
-            SetMusicVolume(PlayerPrefs.GetFloat("musicVolume"));
-            SetSoundEffectVolume(PlayerPrefs.GetFloat("soundEffectVolume"));
+            SetMusicVolume(PlayerPrefs.GetFloat("MusicVolume"));
+            SetSoundEffectVolume(PlayerPrefs.GetFloat("MusicVolume"));
         }
 
         if (playOnStart == true)
@@ -51,8 +51,7 @@ public class AudioManager : MonoBehaviour //Daan
     /// <param name="sliderValue">the value of the volume slider</param>
     public void SetMusicVolume(float sliderValue)
     {
-        musicMixer.SetFloat("MusicVolume", Mathf.Log10(sliderValue) * 20);
-        PlayerPrefs.SetFloat("musicVolume", sliderValue);
+        backgroundMusicPlayer.volume = sliderValue;
     }
 
     /// <summary>
@@ -61,8 +60,7 @@ public class AudioManager : MonoBehaviour //Daan
     /// <param name="sliderValue"></param>
     public void SetSoundEffectVolume(float sliderValue)
     {
-        sfxMixer.SetFloat("SFXVolume", Mathf.Log10(sliderValue) * 20);
-        PlayerPrefs.SetFloat("soundEffectVolume", sliderValue);
+        soundEffectPlayer.volume = sliderValue;
     }
 
     /// <summary>

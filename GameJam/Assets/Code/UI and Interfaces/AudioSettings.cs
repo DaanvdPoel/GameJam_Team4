@@ -31,7 +31,8 @@ public class AudioSettings : SettingsMenu
 
     public void ChangeVolume()
     {
-        AudioListener.volume = Mathf.RoundToInt(_musicVolumeSlider.value);
+        AudioManager.instance.SetMusicVolume(_musicVolumeSlider.value);
+        AudioManager.instance.SetSoundEffectVolume(_musicVolumeSlider.value);
         SaveSettings();
 
         _musicVolumeText.text = Mathf.RoundToInt(_musicVolumeSlider.value * 100).ToString(); 
@@ -42,7 +43,7 @@ public class AudioSettings : SettingsMenu
 
     private void LoadSettings()
     {
-        _musicVolumeSlider.value = PlayerPrefs.GetInt("MusicVolume");
+        _musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume");
 
         _musicVolumeText.text = Mathf.RoundToInt(_musicVolumeSlider.value * 100).ToString();
     }
@@ -50,6 +51,6 @@ public class AudioSettings : SettingsMenu
 
     private void SaveSettings()
     {
-        PlayerPrefs.SetInt("MusicVolume", Mathf.RoundToInt(_musicVolumeSlider.value));
+        PlayerPrefs.SetFloat("MusicVolume", _musicVolumeSlider.value);
     }
 }

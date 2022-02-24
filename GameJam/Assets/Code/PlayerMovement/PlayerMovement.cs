@@ -88,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
+            AudioManager.instance.PlaySoundEffect(2);
         }
     }
 
