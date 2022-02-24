@@ -5,23 +5,33 @@ using System;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public bool movingLeft = false;
+    public bool moving = false;
+    public float fallSpeed = -90;
+    public float jump = 60;
+    public float maxSpeed;
+    public bool jumping = false;
+    public enum fallingState { falling, notFalling, standing};
+    public fallingState state;
+
+    float speed;
+    float xJump;
     Rigidbody2D rb;
-    ContactPoint2D point;
-    float jump = 60;
-    float fallSpeed = -90;
     float xMove = 0;
-    private float xJump;
-    float speed = 13f;
+    float jumpHeight;
+    bool holdingJump;
+    Vector2 oldPosition;
+    ContactPoint2D point;
     Vector2 movementVector;
     bool isGrounded = false;
-    private bool jumping;
-    float jumpHeight;
-    private bool holdingJump;
     Vector2 counterJumpForce;
+    Vector2 newPos;
+    Vector2 previousPos;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        state = fallingState.standing;
         jumpHeight = CalculateJumpForce(Physics2D.gravity.magnitude, jump);
         InputManager.Instance.inputActions.Player.Jump.performed += Jump;
         InputManager.Instance.inputActions.Player.Jump.canceled += JumpCancel;
@@ -38,6 +48,22 @@ public class PlayerMovement : MonoBehaviour
         {
             StopJump();
         }
+
+        Falling();
+    }
+
+    private void Falling()
+    {
+        newPos = transform.position;
+
+        if (newPos.y == previousPos.y)
+            state = fallingState.standing;
+        else if (newPos.y < previousPos.y)
+            state = fallingState.falling;
+        else if (newPos.y > previousPos.y)
+            state = fallingState.notFalling;
+
+        previousPos = transform.position;
     }
 
     private void StopJump()
@@ -68,9 +94,15 @@ public class PlayerMovement : MonoBehaviour
         {
             xMove = movementVector.x;
             xJump = xMove;
-            speed = 10f;
+            moving = true;
+            speed = maxSpeed;
+            oldPosition = transform.position;
             var mover = new Vector2(xMove, 0) * Time.fixedDeltaTime * speed;
             transform.position += (Vector3)mover;
+            if(transform.position.x < oldPosition.x)
+                movingLeft = true;
+            else if(transform.position.x > oldPosition.x)
+                movingLeft = false;
         }
         else if (movementVector == Vector2.zero)
         {
@@ -84,6 +116,7 @@ public class PlayerMovement : MonoBehaviour
                 speed = Mathf.MoveTowards(speed, 0, 1f);
                 var mover = new Vector2(xMove, 0) * Time.fixedDeltaTime * speed;
                 transform.position += (Vector3)mover;
+                moving = false;
             }
         }
     }
