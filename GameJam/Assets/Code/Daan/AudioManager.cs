@@ -28,6 +28,8 @@ public class AudioManager : MonoBehaviour //Daan
             instance = this;
         else
             Destroy(this);
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
