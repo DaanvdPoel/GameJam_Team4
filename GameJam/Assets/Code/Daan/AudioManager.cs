@@ -21,6 +21,7 @@ public class AudioManager : MonoBehaviour //Daan
 
     [Header("Settings")]
     public bool loopMusic = false;
+    public bool playOnStart = true;
 
     private void Awake()
     {
@@ -28,6 +29,8 @@ public class AudioManager : MonoBehaviour //Daan
             instance = this;
         else
             Destroy(this);
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -37,6 +40,9 @@ public class AudioManager : MonoBehaviour //Daan
             SetMusicVolume(PlayerPrefs.GetFloat("musicVolume"));
             SetSoundEffectVolume(PlayerPrefs.GetFloat("soundEffectVolume"));
         }
+
+        if (playOnStart == true)
+            PlayBackgroundMusic(Random.Range(0, backgroundMusic.Length - 1));
     }
 
     /// <summary>
@@ -46,6 +52,7 @@ public class AudioManager : MonoBehaviour //Daan
     public void SetMusicVolume(float sliderValue)
     {
         musicMixer.SetFloat("MusicVolume", Mathf.Log10(sliderValue) * 20);
+        PlayerPrefs.SetFloat("musicVolume", sliderValue);
     }
 
     /// <summary>
@@ -55,6 +62,7 @@ public class AudioManager : MonoBehaviour //Daan
     public void SetSoundEffectVolume(float sliderValue)
     {
         sfxMixer.SetFloat("SFXVolume", Mathf.Log10(sliderValue) * 20);
+        PlayerPrefs.SetFloat("soundEffectVolume", sliderValue);
     }
 
     /// <summary>
