@@ -23,6 +23,7 @@ public class CameraFollow : MonoBehaviour
     public Transform player;
 
     private Vector3 followPlayer;
+    private CameraShake cameraShake;
 
     public float walkingLerpSpeed = 2;
     private float standingLerpSpeed = 1.5f;
@@ -30,6 +31,7 @@ public class CameraFollow : MonoBehaviour
 
     private void Start()
     {
+        cameraShake = GetComponent<CameraShake>();
         offset.x = 4;
         offset.y = 2;
     }
@@ -80,6 +82,11 @@ public class CameraFollow : MonoBehaviour
         {
             transform.position = Vector3.Lerp(transform.position, followPlayer, standingLerpSpeed * Time.fixedDeltaTime);
         }
+    }
+
+    public void Shake()
+    {
+        StartCoroutine(cameraShake.Shake(0.1f, 0.1f));
     }
 }
 
