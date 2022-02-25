@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: EnemyDamage1
   m_EditorClassIdentifier: 
   HealthChangeAmount: 50
-  ChangeInterval: 5
+  ChangeInterval: 0.5
